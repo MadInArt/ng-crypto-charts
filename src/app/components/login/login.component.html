@@ -1,0 +1,31 @@
+<div class="main-div">
+    <mat-card>
+        <form class="example-form" [formGroup]='form' (ngSubmit)="onLoginSubmit(form)">
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput  formControlName='email'>
+                <mat-error *ngIf="form.get('email').touched && form.get('email').invalid" >
+                  Please enter a valid email address
+                </mat-error>
+                <mat-error *ngIf="form.get('email').hasError('required')">
+                  Email is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Password</mat-label>
+                <input type="password" matInput  formControlName='password'>
+                <mat-error *ngIf=" form.get('password').touched && form.get('password').invalid ">
+                  Password is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="form.get('password').hasError('minlength')">
+                  Password must be longer that {{form.get('password').errors.minlength.requiredLength}} symbols;
+                  Current length is {{form.get('password').errors.minlength.actualLength}} symbols.
+                </mat-error>
+            </mat-form-field>
+            <button mat-raised-button  color="primary" type="submit" [disabled]='form.invalid'>Login</button>
+            <span [routerLink]="['/register']" routerLinkActive="router-link-active" > Don't have an acc? Go to register</span>
+          </form>
+        </mat-card>
+</div>

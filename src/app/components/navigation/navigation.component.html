@@ -1,0 +1,27 @@
+<div class="example-container" >
+    <mat-toolbar color="primary" class="example-toolbar" >
+        <mat-toolbar-row class="toolbar_row">
+          <button mat-icon-button (click)="sidenav.toggle()" *ngIf="isToken">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <button mat-icon-button [disabled]='!isToken' (click)='onLogoutClick()'> 
+            <mat-icon class="logout_icon">power_off</mat-icon>
+          </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="example-sidenav-container"> 
+      <mat-sidenav  #sidenav >
+        <mat-nav-list (click)="sidenav.close()" >
+          <a mat-list-item routerLink='dashboard'> Home </a>
+          <a mat-list-item routerLink='dashboard/cryptos'> Crypto overview </a>
+          <a mat-list-item routerLink='dashboard/users'> Manage admins </a>
+        </mat-nav-list>
+      </mat-sidenav>
+
+      <mat-sidenav-content>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+    
+    </mat-sidenav-container>
+</div>

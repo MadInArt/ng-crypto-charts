@@ -1,0 +1,33 @@
+.main-div{
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    mat-card{
+        width: 300px;
+        height: 330px;
+        background-color:lightsteelblue;
+        color: black ;
+        form{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        mat-form-field{
+            margin:30px;
+        }
+    
+            button{
+                margin-top:15px;
+                background-color: rgb(44, 173, 253);
+            }
+            span {
+                text-decoration: underline;
+                font-size: 0.8rem;
+                margin-top: 15px;
+                cursor: pointer;
+            }
+    }
+}

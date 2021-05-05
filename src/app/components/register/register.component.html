@@ -1,0 +1,46 @@
+<div class="main-div">
+    <mat-card>
+        <form class="example-form" [formGroup]='form'  (ngSubmit)="register(form)">
+  
+            <mat-form-field class="example-full-width">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput  formControlName='email'>
+                <mat-error *ngIf="form.get('email').touched && form.get('email').invalid" >
+                  Please enter a valid email address
+                </mat-error>
+                <mat-error *ngIf="form.get('email').hasError('required')">
+                  Email is <strong>required</strong>
+                </mat-error>
+            </mat-form-field>
+  
+            <mat-form-field class="example-full-width">
+                <mat-label>Password</mat-label>
+                <input type="password" matInput  formControlName='password'>
+                <mat-error *ngIf=" form.get('password').touched && form.get('password').invalid ">
+                  Password is <strong>required</strong>
+                </mat-error>
+                <mat-error *ngIf="form.get('password').hasError('minlength')">
+                  Password must be longer that {{form.get('password').errors.minlength.requiredLength}} symbols;
+                  Current length is {{form.get('password').errors.minlength.actualLength}} symbols.
+                </mat-error>
+            </mat-form-field>
+  
+            <mat-form-field class="example-full-width">
+                <mat-label>Confirm password</mat-label>
+                <input type="password" matInput  formControlName='confirmPassword'>
+                <mat-error *ngIf="form.get('confirmPassword').touched && form.get('confirmPassword').invalid">
+                Passwords do not match.
+                </mat-error>
+                <mat-error *ngIf="form.get('confirmPassword').hasError('minlength')">
+                  <div>Password must be longer that {{form.get('confirmPassword').errors.minlength.requiredLength}} symbols;</div>
+                  <div>Current length is {{form.get('confirmPassword').errors.minlength.actualLength}} symbols.</div>
+              </mat-error>
+              
+              
+          </mat-form-field>
+            <button mat-raised-button  color="primary" type="submit" [disabled]='form.invalid'>Register</button>
+            <span [routerLink]="['/login']" routerLinkActive="router-link-active" > Already have an acc? Go to login</span>
+          </form>
+        </mat-card>
+  </div>
+  
