@@ -1,1 +1,64 @@
-<p>cryptos-table works!</p>
+<div class="cryptosContainer">
+    <div class="filterContainer">  
+        <mat-form-field>
+            <mat-label>Filter</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Search for crypto" #input>
+        </mat-form-field>
+</div>
+
+  <div class="cryptosTableContainer">
+    <table mat-table [dataSource]="dataSource" matSort>
+  
+      <ng-container matColumnDef="rank">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Rank </th>
+        <td mat-cell *matCellDef="let cryptos"> {{cryptos.rank}} </td>
+      </ng-container>
+  
+       <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <td mat-cell *matCellDef="let cryptos"> {{cryptos.name}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="priceUsd">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+        <td mat-cell *matCellDef="let cryptos"> {{cryptos.priceUsd | number : '1.0-2'}}$ </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="marketCapUsd">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> market Cap </th>
+        <td mat-cell *matCellDef="let cryptos"> {{cryptos.marketCapUsd | million:'1.0-1'}}m </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="vwap24Hr">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> VWAP (24Hr) </th>
+        <td mat-cell *matCellDef="let cryptos"> {{cryptos.vwap24Hr | number : '1.0-2'}}$ </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="supply">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Supply </th>
+        <td mat-cell *matCellDef="let cryptos"> {{cryptos.supply | million:'1.0-1' }}m </td>
+      </ng-container>
+      
+      <ng-container matColumnDef="volumeUsd24Hr">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Volume (24Hr) </th>
+        <td mat-cell *matCellDef="let cryptos"> {{cryptos.volumeUsd24Hr | million:'1.0-1'}}m </td>
+      </ng-container>
+
+      <ng-container matColumnDef="changePercent24Hr">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Change (24Hr) </th>
+        <td mat-cell *matCellDef="let cryptos" [ngClass]="cryptos.changePercent24Hr > 0 ? 'increase':'decrease'"> {{cryptos.changePercent24Hr | number : '1.0-2' }}%  </td>
+        
+      </ng-container>
+     
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let cryptos; columns: displayedColumns;"></tr>
+     
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+     
+    </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 50]"></mat-paginator>
+  </div>
+</div>

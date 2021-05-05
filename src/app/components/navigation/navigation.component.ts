@@ -19,13 +19,9 @@ export class NavigationComponent  {
 
   currentUrl: string; 
   
-   constructor(private router: Router, private authService : AuthService){ 
-    this.router.events.subscribe((res) => { 
-      this.currentUrl = router.url;
-      console.log(this.currentUrl,  "navigation");
-  })
-}
-  onLogoutClick(){
+   constructor(private router: Router, private authService : AuthService){}
+  
+   onLogoutClick(){
     this.signedOut.emit(true);
   }
 }

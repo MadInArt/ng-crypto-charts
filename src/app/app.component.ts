@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd   } from '@angular/router'; 
-import { filter } from 'rxjs/operators';
+import { Component} from '@angular/core';
+import { Router} from '@angular/router'; 
 import { AuthService } from './services/auth.service';
 
 @Component({
@@ -12,12 +11,7 @@ export class AppComponent {
   
   currentUrl: string;
   
-  constructor(private router: Router, private authService : AuthService){ 
-  this.router.events.subscribe((res) => { 
-    this.currentUrl = router.url;
-    console.log(this.currentUrl);
-  })
-}
+  constructor(private router: Router, private authService : AuthService){}
 
   onLogoutClick(){
     this.authService.logout();

@@ -19,7 +19,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './angular-material.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { MillionPipe } from './shared/pipes/million.pipe';
+import { DecimalPipe } from '@angular/common';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
     CryptosPageComponent,
     UsersPageComponent,
     DashboardComponent,
+    MillionPipe
  
   ],
   imports: [
@@ -44,9 +47,10 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     AngularMaterialModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    HighchartsChartModule
   ],
-  providers: [],
+  providers: [DecimalPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

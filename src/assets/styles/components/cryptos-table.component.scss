@@ -1,0 +1,17 @@
+.cryptosContainer{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+       th{
+        width: 100px;
+    }
+    .increase{
+        color: green;
+    }
+    .decrease{
+        color: red;
+    }
+    .filterContainer{
+        margin-top: 20px;
+    }
+}
