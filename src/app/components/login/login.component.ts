@@ -25,10 +25,8 @@ export class LoginComponent implements OnInit {
         Validators.minLength(6),
       ])
      })
-   
-  }
-  
-  onLoginSubmit(form: FormGroup) {
+     }
+    onLoginSubmit(form: FormGroup) {
     const user: LoginUser = {
       email:  form.value.email,
       password: form.value.password

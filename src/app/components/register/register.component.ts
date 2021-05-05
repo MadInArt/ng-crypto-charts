@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { RegisterUser } from 'src/app/shared/models/user';
 import { CustomValidators } from 'src/app/shared/validators/validators';
 
 @Component({
@@ -13,7 +12,7 @@ export class RegisterComponent implements OnInit {
  
   error = '';
   form: FormGroup;
-  constructor(private authService: AuthService, private router: Router) { }
+  @Output() onRegister: EventEmitter<RegisterUser> =   new EventEmitter<RegisterUser>();
 
   ngOnInit(){
     this.form = new FormGroup({
@@ -32,15 +31,11 @@ export class RegisterComponent implements OnInit {
       ])
     })
   }
-  register(form: FormGroup) {
-    this.error = '';
-    const email = form.value.email;
-    const password = form.value.password;
-    this.authService
-        .register(email, password)
-        .subscribe(
-            res => this.router.navigate(['/dashboard']),
-            err => (this.error = err.error.error)
-        );
+  onRegisterSubmit(form: FormGroup){
+    const user: RegisterUser = {
+      email:  form.value.email,
+      password: form.value.password
+    }
+    this.onRegister.emit(user)
   }
 }
