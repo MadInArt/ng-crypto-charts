@@ -1,2 +1,11 @@
-<app-cryptos-table *ngIf="cryptos" [cryptos]='cryptos'></app-cryptos-table>
-<app-history-line></app-history-line>
+<div class="cryptosItemsContainer">
+    <app-cryptos-table *ngIf="cryptos" [cryptos]='cryptos'></app-cryptos-table>
+     
+    <mat-spinner *ngIf="!chartOptions" class="priceSpinner" ></mat-spinner>
+
+    <highcharts-chart *ngIf="chartOptions" class="priceChart"
+    [Highcharts]="Highcharts"
+    [options]="chartOptions"
+     ></highcharts-chart>
+
+</div>

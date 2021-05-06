@@ -24,7 +24,7 @@ export interface CryptoHistoryList{
 export interface CryptoHistoryItem{
     priceUsd: string;
     time: number;
-    date: string;
+    date?: string;
 }
 
 export interface SocketTrades{

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import * as Highcharts from "highcharts";
 
 
@@ -13,17 +13,22 @@ parallelCoordinates(Highcharts)
 
 
 export class HistoryLineComponent implements OnInit {
-
+  
+  @Input() cryptosHistoryDataArray;
   constructor() { }
+
+  Highcharts = Highcharts;
+  chartOptions;
 
   ngOnInit(): void {
     const SECONDS = 1530403200000;
     const result = new Date(SECONDS).toLocaleString().split(',')[0].toString()
-    console.log(result) // convert seconds to DD
-  }
+    // console.log(result) // convert seconds to DD
+    console.log(this.cryptosHistoryDataArray, 'chart component')
 
-  Highcharts = Highcharts;
-  chartOptions = {
+    // console.log(bitcoinData)
+
+   this.chartOptions = {
     chart: {
       events: {
         load(){
@@ -35,26 +40,28 @@ export class HistoryLineComponent implements OnInit {
         }
       }
     },
-    series: [{
-        data: [2, 6, 3, 2, 4, 12, 123,31,14,54,12,65,323,4,2]
-      }, {
-        data: [[
-          "22-12-2000",
-          376.2
-          ],
-          [
-            "23-12-2000",
-          371.3
-          ],
-          [
-            "24-12-2000",
-          374.5
-          ],
-         ]
-      }]
+    // series: [{
+    //     data: [
+    //       "22/12/2000",
+    //       376.2
+    //       ]},
+    //     data: [[
+    //       "22/12/2000",
+    //       376.2
+    //       ],
+    //       [
+    //         "22/12/2000",
+    //       371.3
+    //       ],
+    //       [
+    //         "22/12/2000",
+    //       374.5
+    //       ],
+    //      ]
+    //   }]
 
   };
-  btn = document.getElementById("btn")
+  }
 
-
+  
 }

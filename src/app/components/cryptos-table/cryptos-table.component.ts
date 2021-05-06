@@ -36,6 +36,8 @@ export class CryptosTableComponent implements OnChanges {
       this.dataSource.paginator.firstPage();
     }
   }
+  
+  
 
 
 }

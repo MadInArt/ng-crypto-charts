@@ -22,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MillionPipe } from './shared/pipes/million.pipe';
 import { DecimalPipe } from '@angular/common';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { UsersTableComponent } from './components/users-table/users-table.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { HighchartsChartModule } from 'highcharts-angular';
     CryptosPageComponent,
     UsersPageComponent,
     DashboardComponent,
-    MillionPipe
+    MillionPipe,
+    UsersTableComponent
  
   ],
   imports: [

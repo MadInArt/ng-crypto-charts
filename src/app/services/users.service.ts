@@ -6,10 +6,13 @@ import { ApiService } from './api.service';
 
 
 
+
+const __usersUrl = 'https://reqres.in/api'
+
 @Injectable({
   providedIn: 'root'
 })
-const __usersUrl = 'https://reqres.in/api'
+
 export class UserServiceService {
 
   constructor(private apiService : ApiService) { }
@@ -31,7 +34,7 @@ export class UserServiceService {
     })).subscribe()
   }
 
-  deleteUsers(user: User): void{
+  deleteUser(user: User): void{
     this.apiService.delete(`${__usersUrl}/users/${user.id}`).pipe(tap((delUser: User) =>{ 
       let newUserList = this.usersListSub.getValue();
       newUserList = newUserList.filter(u => u.id !== user.id);
@@ -39,17 +42,8 @@ export class UserServiceService {
       console.log("userService delete", delUser)
     })).subscribe()
   }
-
-  postUsers(data: User): void{
-    this.apiService.post(`${__usersUrl}/users?page=2`, data).pipe(tap((newUser: User) =>{ 
-      const newUserList = this.usersListSub.getValue();
-      newUserList.push(newUser) 
-      this.usersListSub.next(newUserList)
-      console.log("userService post", newUser)
-  })).subscribe()
-
-  }
-  updateUsers(updatedUserData: User): void{
+  
+  updateUser(updatedUserData: User): void{
     this.apiService.put(`${__usersUrl}users?page=2`, updatedUserData).pipe(tap((updatedUser: User) =>{ 
       let newUserList = this.usersListSub.getValue();
       let foundIndex = newUserList.findIndex(u=>u.id == updatedUserData.id);
