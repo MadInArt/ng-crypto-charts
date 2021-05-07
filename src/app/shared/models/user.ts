@@ -10,7 +10,7 @@ export interface Users{
     data: User[];
 }
 
-export interface User{
+export class User{
     id: number;
     email: string;
     first_name: string;

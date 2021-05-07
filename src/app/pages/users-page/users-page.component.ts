@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api.service';
 import { UserServiceService } from 'src/app/services/users.service';
 import { User } from 'src/app/shared/models/user';
 
@@ -29,7 +28,6 @@ onDeleteClick(data){
 }
 onUserDelete(user){
   this.usersService.deleteUser(user)
-  console.log('delete', this.deleteData)
 }
 // onUserUpdate(data): void{ 
 //  this.myForm.setUpdateUser(data)

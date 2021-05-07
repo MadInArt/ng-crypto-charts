@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Snackbar } from '../components/snackbar/snackbar';
 import { User, Users } from '../shared/models/user';
 import { ApiService } from './api.service';
 
@@ -15,8 +16,11 @@ const __usersUrl = 'https://reqres.in/api'
 
 export class UserServiceService {
 
-  constructor(private apiService : ApiService) { }
+
+
+  constructor(private apiService : ApiService, private snackBar : Snackbar) { }
   
+    action = 'Got it'
     usersList: User[] = [];
     private usersListSub: BehaviorSubject<User[]> = new BehaviorSubject<User[]>([]);
     currentData = this.usersListSub.asObservable();
@@ -35,11 +39,16 @@ export class UserServiceService {
   }
 
   deleteUser(user: User): void{
+
     this.apiService.delete(`${__usersUrl}/users/${user.id}`).pipe(tap((delUser: User) =>{ 
       let newUserList = this.usersListSub.getValue();
       newUserList = newUserList.filter(u => u.id !== user.id);
       this.usersListSub.next(newUserList)
-      console.log("userService delete", delUser)
+      
+      const message = `User ${user.first_name} been deleted `
+ 
+      this.snackBar.openSnackBar(message, this.action)
+
     })).subscribe()
   }
   

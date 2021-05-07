@@ -23,6 +23,7 @@ import { MillionPipe } from './shared/pipes/million.pipe';
 import { DecimalPipe } from '@angular/common';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { UsersTableComponent } from './components/users-table/users-table.component';
+import { Snackbar } from './components/snackbar/snackbar';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,7 @@ import { UsersTableComponent } from './components/users-table/users-table.compon
     HttpClientModule,
     HighchartsChartModule
   ],
-  providers: [DecimalPipe],
+  providers: [DecimalPipe, Snackbar],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
