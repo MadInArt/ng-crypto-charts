@@ -1,1 +1,4 @@
-<p>dynamic-chart works!</p>
+<highcharts-chart *ngIf="chartOptions" class="priceChart"
+[Highcharts]="Highcharts"
+[options]="chartOptions"
+ ></highcharts-chart>

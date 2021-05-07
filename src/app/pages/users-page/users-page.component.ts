@@ -5,7 +5,7 @@ import { User } from 'src/app/shared/models/user';
 @Component({
   selector: 'app-users-page',
   templateUrl: './users-page.component.html',
-  styleUrls: ['../../../assets/styles/pages/users-page.component.scss']
+  styleUrls: ['./users-page.component.scss']
 })
 export class UsersPageComponent implements OnInit {
 

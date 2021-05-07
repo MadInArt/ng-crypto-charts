@@ -7,7 +7,7 @@ import { CryptoItem } from 'src/app/shared/models/cryptos';
 @Component({
   selector: 'app-cryptos-table',
   templateUrl: './cryptos-table.component.html',
-  styleUrls: ['../../../assets/styles/components/cryptos-table.component.scss']
+  styleUrls: ['./cryptos-table.component.scss']
 })
 export class CryptosTableComponent implements OnChanges {
  

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
+import { webSocket } from 'rxjs/webSocket';
 import { CryptoHistoryItem, CryptoItem } from '../shared/models/cryptos';
 import { ApiService } from './api.service';
 
@@ -15,32 +16,23 @@ const __cryptosUrl = 'https://api.coincap.io/v2';
 
 export class CryptosService {
 
+  ws = webSocket('wss://ws.coincap.io/prices?assets=bitcoin')
+ 
+
   constructor(private apiService: ApiService) { }
 
   private cryptosListSub: BehaviorSubject<CryptoItem[]> = new BehaviorSubject<CryptoItem[]>([]);
   currentData = this.cryptosListSub.asObservable();
 
-  private bitcoinHistorySub: BehaviorSubject<CryptoHistoryItem[]> = new BehaviorSubject<CryptoHistoryItem[]>([]);
-  bitcoinData = this.bitcoinHistorySub.asObservable();
-  
-  private ethereumHistorySub: BehaviorSubject<CryptoHistoryItem[]> = new BehaviorSubject<CryptoHistoryItem[]>([]);
-  ethereumData = this.ethereumHistorySub.asObservable();
-  
-  private binanceCoinHistorySub: BehaviorSubject<CryptoHistoryItem[]> = new BehaviorSubject<CryptoHistoryItem[]>([]);
-  binanceCoinData = this.binanceCoinHistorySub.asObservable();
-  
-  private dogeCoinHistorySub: BehaviorSubject<CryptoHistoryItem[]> = new BehaviorSubject<CryptoHistoryItem[]>([]);
-  dogeCoinData = this.dogeCoinHistorySub.asObservable();
-  
-  private stellarHistorySub: BehaviorSubject<CryptoHistoryItem[]> = new BehaviorSubject<CryptoHistoryItem[]>([]);
-  stellarData = this.stellarHistorySub.asObservable();
+  private  cryptosListHistorySub: BehaviorSubject<Array<{key: string, data :CryptoHistoryItem[]}>> = new BehaviorSubject<Array<{key: string, data :CryptoHistoryItem[]}>>([]);
 
   cryptosHistoryArr =  [
-        {key: 'bitcoin', sub: this.bitcoinHistorySub}, 
-        {key: 'ethereum', sub: this.ethereumHistorySub},
-        {key: 'dogecoin', sub: this.dogeCoinHistorySub}, 
-        {key: 'stellar', sub: this.stellarHistorySub}
+        'bitcoin', 
+        'ethereum',
+        'dogecoin', 
+        'stellar', 
   ];
+
   cryptosPriceArr = [
     {key: 'bitcoin', value : []},
     {key: 'ethereum', value : []},
@@ -56,11 +48,22 @@ export class CryptosService {
       this.cryptosListSub.next(data.data)
     })).subscribe()
   }
-  getCryptosHistory(): void{
+  updateCryptosHistory(): void{
     this.cryptosHistoryArr.forEach((crypto)=>{
-      this.apiService.get(`${__cryptosUrl}/assets/${crypto.key}/history?interval=d1`).pipe(
-        tap(d => crypto.sub.next(d.data))).subscribe();
+      this.apiService.get(`${__cryptosUrl}/assets/${crypto}/history?interval=h1`).pipe(
+        tap(d =>{
+          const cryptosListHistory = this.cryptosListHistorySub.getValue();
+          this.cryptosListHistorySub.next([{key: crypto, data: d.data}, ...cryptosListHistory])
+          })).subscribe();
     });
+  }
+
+  getCryptosHistory() {
+    return this.cryptosListHistorySub;
+  }
+
+  getWebSocket(){
+    return this.ws;
   }
   // getCryptosPrices(): void {
   //   this.cryptosPriceArr.forEach((crypto)=>{

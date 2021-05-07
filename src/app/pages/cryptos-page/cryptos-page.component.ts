@@ -1,92 +1,67 @@
-import { Component, OnInit} from '@angular/core';
-import * as Highcharts from 'highcharts';
-import theme from 'highcharts/themes/dark-unica';
-theme(Highcharts);
-import { Subscription, of } from 'rxjs';
-import { concatMap, delay } from 'rxjs/operators';
+import { Component, OnInit, ViewChild} from '@angular/core';
+
+
 import { CryptosService } from 'src/app/services/cryptos.service';
 import {  CryptoItem } from 'src/app/shared/models/cryptos';
-import {
-  webSocket
-} from 'rxjs/webSocket';
+
+import { HistoryLineComponent } from './../../components/history-line/history-line.component';
 
 @Component({
   selector: 'app-cryptos-page',
   templateUrl: './cryptos-page.component.html',
-  styleUrls: ['../../../assets/styles/pages/cryptos-page.component.scss']
+  styleUrls: ['./cryptos-page.component.scss']
 })
 export class CryptosPageComponent implements OnInit {
- 
-  cryptos: CryptoItem[] = [];
-  cryptosHistoryDataArray = []
   
-  rate: any;
-  rate$: Subscription;
-  Highcharts: typeof Highcharts = Highcharts;
-  chardata: any[] = [];
-  chartOptions: any;
-  ws = webSocket('wss://ws.coincap.io/prices?assets=bitcoin')
+  cryptos: CryptoItem[] = [];
+  ws: any;
+  isWsLoading:boolean;
  
-  cryptosDataArr = [
-    this.cryptosService.bitcoinData ,
-    this.cryptosService.ethereumData ,
-    this.cryptosService.binanceCoinData ,
-    this.cryptosService.dogeCoinData,
-    this.cryptosService.stellarData ,
-  ]
+ @ViewChild('historyLine') historyLine: HistoryLineComponent;
+
+  top5CryptoPriceArray: string | number[];
+  top5CryptoNameandPrice: string  [] [];
+  cryptosHistoryDataArray: { key: string; data: import("c:/Users/mkozhemiakin/test-projects/angular-crypto-charts/src/app/shared/models/cryptos").CryptoHistoryItem[]; }[];
 
   constructor(private cryptosService: CryptosService) { }
 
   ngOnInit(): void {
+    this.isWsLoading = true;
+    this.ws = this.cryptosService.getWebSocket()
     this.cryptosService.getCryptos();
     this.cryptosService.getCryptosList().subscribe(cryptosList => {
-      this.cryptos = cryptosList})
+ 
+      this.cryptos = cryptosList;
 
-    this.cryptosService.getCryptosHistory();
-    this.cryptosDataArr.forEach(coinData => {
-      coinData.subscribe(data => {
-       this.checkLength(data)
-       console.log(this.cryptosHistoryDataArray)
-    
+      this.top5CryptoNameandPrice = this.cryptos.slice(0, 5).map(item => {
+        return [
+           item.id,
+           item.priceUsd
+        ]
       })
+    
+    // console.log(this.top5CryptoNameandPrice)
+
+       this.top5CryptoPriceArray = this.cryptos.slice(0, 5).map(item => {
+       return item.priceUsd;
+      }).map(i => Number(i))
+      console.log(this.top5CryptoPriceArray)
     })
 
-    this.rate = this.ws.pipe(
-      concatMap(item => of (item).pipe(delay(1000)))
-    ).subscribe(data => {
-      this.rate = data;
-      this.chardata.push(Number(this.rate.bitcoin))
-
-      this.chartOptions = {
-        chart: {
-          type: "line",
-        },
-        series: [{
-          data: this.chardata,
-           showInLegend: false,         
-        }],
-        title: {
-          text: "Bitcoin dynamic price",
-        },
-        xAxis: {
-          labels: {
-              enabled: false
-          },
-        },
-        marker: {
-          enabled: false
-       } 
-      };
-    })
-  }
-
-  checkLength(data){
-        if(data.length > 0 ){
-          this.cryptosHistoryDataArray.push(data)
-        } else {
-          return null;
-        }
-      }
       
+    // this.cryptosService.updateCryptosHistory();
+    // this.cryptosService.getCryptosHistory().subscribe(data => {
+    //   if(!data.length) {
+    //     return;
+    //   }
+    //   this.cryptosHistoryDataArray = data;
+    //   console.log(this.cryptosHistoryDataArray);
+    //   this.historyLine.addDataSource(this.cryptosHistoryDataArray);
+    // })
+
+  setTimeout(()=>{
+    this.isWsLoading = false;
+  }, 3000)
+  }
   }
  

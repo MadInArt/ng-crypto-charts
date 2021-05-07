@@ -6,7 +6,7 @@ import { RegisterUser } from 'src/app/shared/models/user';
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
-  styleUrls: ['../../../assets/styles/pages/register-page.component.scss']
+  styleUrls: ['./register-page.component.scss']
 })
 export class RegisterPageComponent implements OnInit {
 

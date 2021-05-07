@@ -6,7 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
-  styleUrls: ['../../../assets/styles/components/navigation.component.scss']
+  styleUrls: ['./navigation.component.scss']
 })
 
 export class NavigationComponent  {

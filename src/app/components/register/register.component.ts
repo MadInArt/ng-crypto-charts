@@ -6,7 +6,7 @@ import { CustomValidators } from 'src/app/shared/validators/validators';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['../../../assets/styles/components/register.component.scss']
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
  

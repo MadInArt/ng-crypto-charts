@@ -1,11 +1,19 @@
 <div class="cryptosItemsContainer">
     <app-cryptos-table *ngIf="cryptos" [cryptos]='cryptos'></app-cryptos-table>
      
-    <mat-spinner *ngIf="!chartOptions" class="priceSpinner" ></mat-spinner>
+    <!-- <mat-spinner *ngIf="isWsLoading" class="priceSpinner" ></mat-spinner> -->
 
-    <highcharts-chart *ngIf="chartOptions" class="priceChart"
-    [Highcharts]="Highcharts"
-    [options]="chartOptions"
-     ></highcharts-chart>
+    
+
+
+    <ng-container *ngIf="!ws; else data">
+         <mat-spinner   class="priceSpinner" ></mat-spinner>
+    </ng-container>
+
+    <ng-template #data>
+        <app-dynamic-chart [ws]='ws'></app-dynamic-chart>
+    </ng-template>
+ 
+
 
 </div>

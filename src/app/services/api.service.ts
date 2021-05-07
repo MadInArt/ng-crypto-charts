@@ -10,16 +10,17 @@ export class ApiService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      mode: 'no-cors'
+      mode: 'no-cors',
+      // 'params': 'interval=h1'
     })
   }
   constructor(private httpClient: HttpClient) { }
 
-  get(url: string,): Observable<any>{
+  get(url: string, params = {}): Observable<any>{
+       this.httpOptions["params"] = params
        return this.httpClient.get<any>(url)
   }
-  delete(url: string, params = {}): Observable<any>{
-      // this.httpOptions["params"] = params
+  delete(url: string): Observable<any>{
       return this.httpClient.delete(url, 
         //  this.httpOptions
          )

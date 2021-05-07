@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginUser } from 'src/app/shared/models/user';
 import { Snackbar } from '../../components/snackbar/snackbar'
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
-  styleUrls: ['../../../assets/styles/pages/login-page.component.scss']
+  styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
   action = 'Got it'

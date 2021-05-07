@@ -1,7 +1,6 @@
-<highcharts-chart
-  style="width: 800px; display: block"
-  [Highcharts]="Highcharts"
-  [constructorType]="'chart'"
-  [options]="chartOptions"
->
-</highcharts-chart>
+<!-- <div *ngFor="let cryptosHistoryData of cryptosHistoryDataArray"> -->
+
+  <igx-financial-chart
+      [dataSource]="dataTest" >
+   </igx-financial-chart>
+<!-- </div> -->

@@ -24,6 +24,7 @@ import { DecimalPipe } from '@angular/common';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { UsersTableComponent } from './components/users-table/users-table.component';
 import { Snackbar } from './components/snackbar/snackbar';
+import { IgxFinancialChartModule } from "igniteui-angular-charts";
 
 @NgModule({
   declarations: [
@@ -42,7 +43,6 @@ import { Snackbar } from './components/snackbar/snackbar';
     DashboardComponent,
     MillionPipe,
     UsersTableComponent
- 
   ],
   imports: [
     BrowserModule,
@@ -51,9 +51,11 @@ import { Snackbar } from './components/snackbar/snackbar';
     AngularMaterialModule,
     ReactiveFormsModule,
     HttpClientModule,
-    HighchartsChartModule
+    HighchartsChartModule,
+    IgxFinancialChartModule
   ],
   providers: [DecimalPipe, Snackbar],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
