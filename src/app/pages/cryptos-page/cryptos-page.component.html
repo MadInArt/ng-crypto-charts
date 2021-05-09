@@ -1,16 +1,15 @@
 <div class="cryptosItemsContainer">
     <app-cryptos-table *ngIf="cryptos" [cryptos]='cryptos'></app-cryptos-table>
-     
-    <!-- <mat-spinner *ngIf="isWsLoading" class="priceSpinner" ></mat-spinner> -->
 
-    
+    <app-history-line [top5CryptoPriceArr]="top5CryptoPriceArr" 
+    [top5CryptoNameArr]="top5CryptoNameArr">
+    </app-history-line>
 
-
-    <ng-container *ngIf="!ws; else data">
+    <ng-container *ngIf="!wsFromDynamicChild; else data">
          <mat-spinner   class="priceSpinner" ></mat-spinner>
     </ng-container>
 
-    <ng-template #data>
+    <ng-template  #data>
         <app-dynamic-chart [ws]='ws'></app-dynamic-chart>
     </ng-template>
  
