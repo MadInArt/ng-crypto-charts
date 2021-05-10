@@ -24,13 +24,7 @@ onDeleteClick(data){
   this.deleteData = data;
   this.onUserDelete(data)
 }
-
 onUserDelete(user){
   this.usersService.deleteUser(user)
 }
-
-onShowEmailClick(){
-  
-}
-
 }

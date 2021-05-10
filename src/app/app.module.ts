@@ -7,7 +7,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DynamicChartComponent } from './components/dynamic-chart/dynamic-chart.component';
-import { HistoryLineComponent } from './components/history-line/history-line.component';
+import { PriceChartsComponent } from './components/price-charts/price-charts.component';
 import { CryptosTableComponent } from './components/cryptos-table/cryptos-table.component';
 import { ErorPageComponent } from './pages/eror-page/eror-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
@@ -34,7 +34,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     LoginComponent,
     RegisterComponent,
     DynamicChartComponent,
-    HistoryLineComponent,
+    PriceChartsComponent,
     CryptosTableComponent,
     ErorPageComponent,
     LoginPageComponent,

@@ -1,5 +1,9 @@
-<highcharts-chart *ngIf="chartOptions" 
-[Highcharts]="Highcharts"
-[options]="chartOptions"
-class="priceChart"
+<highcharts-chart 
+    *ngIf="chartOptions && chartdata.length else spinner" 
+    [Highcharts]="Highcharts"
+    [options]="chartOptions"
+    class="priceChart"
 ></highcharts-chart>
+<ng-template  #spinner>
+    <mat-spinner class="priceSpinner"></mat-spinner>
+</ng-template>

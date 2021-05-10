@@ -18,7 +18,7 @@ export class DynamicChartComponent implements OnInit {
   rate: any;
   rate$: Subscription;
   Highcharts: typeof Highcharts = Highcharts;
-  chardata: any[] = [];
+  chartdata: any[] = [];
   chartOptions: any;
   constructor() { }
 
@@ -28,14 +28,14 @@ export class DynamicChartComponent implements OnInit {
       concatMap(item => of (item).pipe(delay(1000)))
     ).subscribe(data => {
       this.rate = data;
-      this.chardata.push(Number(this.rate.bitcoin))
+      this.chartdata.push(Number(this.rate.bitcoin))
 
       this.chartOptions = {
         chart: {
           type: "line",
         },
         series: [{
-          data: this.chardata,
+          data: this.chartdata,
            showInLegend: false,         
         }],
         title: {

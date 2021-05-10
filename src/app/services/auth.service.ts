@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from './api.service';
@@ -28,10 +27,10 @@ export class AuthService {
 
     register(username: string, password: string) {
       const request = this.apiService.post(`${this.__apiURL}register`, {
-          username,
-          password
-      });
-      request.subscribe((res: any) => { 
+        username,
+        password
+    });
+       request.subscribe((res: any) => { 
         this.setToken(res.token)
         this.router.navigate(['/dashboard']);
       }),error =>{

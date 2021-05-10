@@ -5,9 +5,6 @@ import { Snackbar } from '../components/snackbar/snackbar';
 import { User, Users } from '../shared/models/user';
 import { ApiService } from './api.service';
 
-
-
-
 const __usersUrl = 'https://reqres.in/api'
 
 @Injectable({

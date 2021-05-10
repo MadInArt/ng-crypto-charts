@@ -16,12 +16,10 @@ export class CryptosPageComponent implements OnInit, OnDestroy
   
   cryptos: CryptoItem[] = [];
   ws: any;
-  // isWsLoading:boolean;
+
  
  @ViewChild('dynamicChart') dynamicChart: DynamicChartComponent;
-
-  wsFromDynamicChild: any;
-  
+ 
   top5CryptoPriceSubj: Subject<any> = new Subject();
   top5CryptoNameSubj: Subject<any> = new Subject();
 
@@ -32,7 +30,7 @@ export class CryptosPageComponent implements OnInit, OnDestroy
 
   async ngOnInit() {
 
-    // this.isWsLoading = true;
+
     this.ws = this.cryptosService.getWebSocket()
     this.cryptosService.getCryptos();
     this.cryptosService.getCryptosList().subscribe(cryptosList => {

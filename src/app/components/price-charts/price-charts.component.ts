@@ -17,13 +17,13 @@ export type ChartOptions = {
 };
 
 @Component({
-  selector: 'app-history-line',
-  templateUrl: './history-line.component.html',
-  styleUrls: ['./history-line.component.scss']
+  selector: 'app-price-charts',
+  templateUrl: './price-charts.component.html',
+  styleUrls: ['./price-charts.component.scss']
 })
 
 
-export class HistoryLineComponent implements  OnChanges{
+export class PriceChartsComponent implements  OnChanges{
  
   @ViewChild("chart") chart: ChartComponent;
 
@@ -39,10 +39,10 @@ export class HistoryLineComponent implements  OnChanges{
   constructor() {}
 
   ngOnChanges(){
-    this.builtChart()
+    this.buildChart()
    }
 
-  builtChart(){
+   buildChart(){
 
     this.top5CryptoNameSubj.subscribe(name => {
       this.name = name;
@@ -62,7 +62,7 @@ export class HistoryLineComponent implements  OnChanges{
       //       shadeTo: 'dark',
       //       shadeIntensity: 0.65
       //   }
-      // },
+      // },   for some reasons applying theme object doesnt change style at all
       series: [
         {
           name: "basic",
@@ -89,7 +89,7 @@ export class HistoryLineComponent implements  OnChanges{
 }
 // ngOnDestroy(){
 //   this.top5CryptoNameSubj.unsubscribe();
-//   this.top5CryptoPriceSubj.unsubscribe();
+//   this.top5CryptoPriceSubj.unsubscribe();  need to find better way of unsubscribe, this one occures errors while coming back to component
 // }
 
 }
