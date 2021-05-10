@@ -52,5 +52,4 @@ export class DynamicChartComponent implements OnInit {
       };
     })
   }
-
 }

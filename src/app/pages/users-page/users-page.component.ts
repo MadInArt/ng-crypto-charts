@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { UserServiceService } from 'src/app/services/users.service';
 import { User } from 'src/app/shared/models/user';
 
@@ -8,7 +9,8 @@ import { User } from 'src/app/shared/models/user';
   styleUrls: ['./users-page.component.scss']
 })
 export class UsersPageComponent implements OnInit {
-
+  
+  private serviceSubs : Subscription;
   users: User[] = [];
   deleteData: User;
 
@@ -19,12 +21,13 @@ export class UsersPageComponent implements OnInit {
     this.usersService.getUsersList().subscribe(userList => {
       this.users = userList;
     });
-}
-onDeleteClick(data){
-  this.deleteData = data;
-  this.onUserDelete(data)
-}
-onUserDelete(user){
-  this.usersService.deleteUser(user)
-}
+  }
+  onDeleteClick(data){
+    this.deleteData = data;
+    this.onUserDelete(data)
+  }
+  onUserDelete(user){
+    this.usersService.deleteUser(user)
+  }
+
 }

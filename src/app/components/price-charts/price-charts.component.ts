@@ -1,13 +1,7 @@
-import { Component, Input, OnChanges, ViewChild, OnDestroy } from '@angular/core';
-import {
-  ApexAxisChartSeries,
-  ApexChart,
-  ChartComponent,
-  ApexDataLabels,
-  ApexXAxis,
-  ApexPlotOptions
-} from "ng-apexcharts";
+import { Component, Input, OnChanges, ViewChild } from '@angular/core';
+import { ApexAxisChartSeries, ApexChart, ChartComponent, ApexDataLabels, ApexXAxis, ApexPlotOptions } from "ng-apexcharts";
 import { Subject } from 'rxjs';
+
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
@@ -22,11 +16,10 @@ export type ChartOptions = {
   styleUrls: ['./price-charts.component.scss']
 })
 
-
 export class PriceChartsComponent implements  OnChanges{
  
   @ViewChild("chart") chart: ChartComponent;
-
+  
   public chartOptions;
   @Input() top5CryptoNameSubj : Subject <any>;
   @Input() top5CryptoPriceSubj : Subject <any>;
@@ -87,9 +80,6 @@ export class PriceChartsComponent implements  OnChanges{
       
   }
 }
-// ngOnDestroy(){
-//   this.top5CryptoNameSubj.unsubscribe();
-//   this.top5CryptoPriceSubj.unsubscribe();  need to find better way of unsubscribe, this one occures errors while coming back to component
-// }
+
 
 }

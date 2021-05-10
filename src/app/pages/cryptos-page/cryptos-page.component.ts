@@ -1,5 +1,5 @@
 import {  Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { DynamicChartComponent } from 'src/app/components/dynamic-chart/dynamic-chart.component';
 
 
@@ -13,7 +13,7 @@ import {  CryptoItem } from 'src/app/shared/models/cryptos';
 })
 export class CryptosPageComponent implements OnInit, OnDestroy 
 {
-  
+  private serviceSubs : Subscription;
   cryptos: CryptoItem[] = [];
   ws: any;
 
@@ -28,12 +28,12 @@ export class CryptosPageComponent implements OnInit, OnDestroy
 
   constructor(private cryptosService: CryptosService) { }
 
-  async ngOnInit() {
+   ngOnInit() {
 
 
     this.ws = this.cryptosService.getWebSocket()
-    this.cryptosService.getCryptos();
-    this.cryptosService.getCryptosList().subscribe(cryptosList => {
+    this.cryptosService.getCryptos(); 
+    this.serviceSubs = this.cryptosService.getCryptosList().subscribe(cryptosList => {
  
       this.cryptos = cryptosList;
     
@@ -56,7 +56,7 @@ export class CryptosPageComponent implements OnInit, OnDestroy
    ngOnDestroy(){
       // this.top5CryptoNameSubj.unsubscribe();
       // this.top5CryptoPriceSubj.unsubscribe();
-      // this.cryptosService.getCryptosList().unsubscribe()
+      this.serviceSubs.unsubscribe()
    }
   }
  
