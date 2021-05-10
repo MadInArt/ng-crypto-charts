@@ -19,18 +19,18 @@ export class UsersPageComponent implements OnInit {
     this.usersService.getUsersList().subscribe(userList => {
       this.users = userList;
     });
-  
-  
 }
 onDeleteClick(data){
   this.deleteData = data;
   this.onUserDelete(data)
 }
+
 onUserDelete(user){
   this.usersService.deleteUser(user)
 }
-// onUserUpdate(data): void{ 
-//  this.myForm.setUpdateUser(data)
 
-// }
+onShowEmailClick(){
+  
+}
+
 }

@@ -1,29 +1,29 @@
-import { AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {  Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { Subject } from 'rxjs';
 import { DynamicChartComponent } from 'src/app/components/dynamic-chart/dynamic-chart.component';
 
 
 import { CryptosService } from 'src/app/services/cryptos.service';
-import {  CryptoHistoryItem, CryptoItem } from 'src/app/shared/models/cryptos';
-
-import { HistoryLineComponent } from './../../components/history-line/history-line.component';
+import {  CryptoItem } from 'src/app/shared/models/cryptos';
 
 @Component({
   selector: 'app-cryptos-page',
   templateUrl: './cryptos-page.component.html',
   styleUrls: ['./cryptos-page.component.scss']
 })
-export class CryptosPageComponent implements OnInit
-// , AfterViewInit 
+export class CryptosPageComponent implements OnInit, OnDestroy 
 {
   
   cryptos: CryptoItem[] = [];
   ws: any;
   // isWsLoading:boolean;
  
- @ViewChild('historyLine') historyLine: HistoryLineComponent;
-//  @ViewChild('dynamicChart') dynamicChart: DynamicChartComponent;
+ @ViewChild('dynamicChart') dynamicChart: DynamicChartComponent;
 
   wsFromDynamicChild: any;
+  
+  top5CryptoPriceSubj: Subject<any> = new Subject();
+  top5CryptoNameSubj: Subject<any> = new Subject();
 
   public top5CryptoPriceArr: any = [];
   public top5CryptoNameArr: any = [];
@@ -39,39 +39,26 @@ export class CryptosPageComponent implements OnInit
  
       this.cryptos = cryptosList;
     
-       this.top5CryptoPriceArr = this.cryptos.slice(0, 5).map(item => {
+       this.top5CryptoPriceArr = this.cryptos.slice(39, 44).map(item => {
         return item.priceUsd;
       }).map(i => Number(i))
 
-      this.top5CryptoNameArr = this.cryptos.slice(0, 5).map(item => {
+      this.top5CryptoNameArr = this.cryptos.slice(39, 44).map(item => {
         return item.id;
       })
-      this.setChartData();
-     
+      this.setChartData()
+  
     })
-
- 
- 
-      // this.cryptosService.updateCryptosHistory();
-    // this.cryptosService.getCryptosHistory().subscribe(data => {
-    //   if(!data.length) {
-    //     return;
-    //   }
-    //   this.cryptosHistoryDataArray = data;
-    //   console.log(this.cryptosHistoryDataArray);
-    //   this.historyLine.addDataSource(this.cryptosHistoryDataArray);
-    // })
-
-  // setTimeout(()=>{
-  //   this.isWsLoading = false;
-  // }, 3000)
-    
 
   }
   setChartData(){
-     console.log(this.top5CryptoNameArr, 'name')
-     console.log(this.top5CryptoPriceArr, 'price')
-  }
-
+    this.top5CryptoNameSubj.next(this.top5CryptoNameArr);
+    this.top5CryptoPriceSubj.next(this.top5CryptoPriceArr)
+   }
+   ngOnDestroy(){
+      // this.top5CryptoNameSubj.unsubscribe();
+      // this.top5CryptoPriceSubj.unsubscribe();
+      // this.cryptosService.getCryptosList().unsubscribe()
+   }
   }
  

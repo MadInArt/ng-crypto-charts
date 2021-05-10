@@ -25,6 +25,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { UsersTableComponent } from './components/users-table/users-table.component';
 import { Snackbar } from './components/snackbar/snackbar';
 import { IgxFinancialChartModule } from "igniteui-angular-charts";
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { IgxFinancialChartModule } from "igniteui-angular-charts";
     ReactiveFormsModule,
     HttpClientModule,
     HighchartsChartModule,
-    IgxFinancialChartModule
+    IgxFinancialChartModule,
+    NgApexchartsModule
   ],
   providers: [DecimalPipe, Snackbar],
   bootstrap: [AppComponent]

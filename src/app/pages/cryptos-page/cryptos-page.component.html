@@ -1,18 +1,22 @@
 <div class="cryptosItemsContainer">
     <app-cryptos-table *ngIf="cryptos" [cryptos]='cryptos'></app-cryptos-table>
+    <div class="plotsContainer">
+        <app-history-line  
+        [top5CryptoNameSubj] = "top5CryptoNameSubj"
+        [top5CryptoPriceSubj] = "top5CryptoPriceSubj"
+             [top5CryptoPriceArr]="top5CryptoPriceArr" 
+             [top5CryptoNameArr]="top5CryptoNameArr">
+        </app-history-line>
 
-    <app-history-line [top5CryptoPriceArr]="top5CryptoPriceArr" 
-    [top5CryptoNameArr]="top5CryptoNameArr">
-    </app-history-line>
+        <!-- <ng-container *ngIf="dynamicChart; else spinner">
+            <app-dynamic-chart [ws]='ws'></app-dynamic-chart>
+       </ng-container>
+   
+       <ng-template  #spinner>
+        <mat-spinner   class="priceSpinner" ></mat-spinner>
+       </ng-template>  -->
+      <app-dynamic-chart [ws]='ws' class="dynamicChart"></app-dynamic-chart>
+     
 
-    <ng-container *ngIf="!wsFromDynamicChild; else data">
-         <mat-spinner   class="priceSpinner" ></mat-spinner>
-    </ng-container>
-
-    <ng-template  #data>
-        <app-dynamic-chart [ws]='ws'></app-dynamic-chart>
-    </ng-template>
- 
-
-
+    </div>
 </div>

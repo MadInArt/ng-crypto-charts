@@ -7,13 +7,13 @@ import { ApiService } from './api.service';
   providedIn: 'root'
 })
 export class AuthService {
-
+  __apiURL = 'https://reqres.in/api/'
   isToken: boolean;
-  constructor(private httpClient: HttpClient, private router: Router, private apiService : ApiService) { }
+  constructor(private router: Router, private apiService : ApiService) { }
 
  
     login(username: string, password: string) {
-    const request = this.httpClient.post('https://reqres.in/api/login', {
+    const request = this.apiService.post(`${this.__apiURL}login`, {
         username,
         password
     });
@@ -27,7 +27,7 @@ export class AuthService {
   }
 
     register(username: string, password: string) {
-      const request = this.httpClient.post('https://reqres.in/api/register', {
+      const request = this.apiService.post(`${this.__apiURL}register`, {
           username,
           password
       });
