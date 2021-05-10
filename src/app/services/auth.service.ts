@@ -31,6 +31,7 @@ export class AuthService {
         password
     });
        request.subscribe((res: any) => { 
+        
         this.setToken(res.token)
         this.router.navigate(['/dashboard']);
       }),error =>{

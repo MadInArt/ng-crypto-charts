@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginUser } from 'src/app/shared/models/user';
@@ -8,7 +8,7 @@ import { Snackbar } from '../../components/snackbar/snackbar'
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss']
 })
-export class LoginPageComponent implements  OnDestroy {
+export class LoginPageComponent  {
   action = 'Got it'
   message = 'No such user exists'
   serviceSubs: Subscription;
@@ -22,8 +22,6 @@ export class LoginPageComponent implements  OnDestroy {
     )
   }
  
-  ngOnDestroy(){
-    this.serviceSubs.unsubscribe();
-  }
+ 
 
 }

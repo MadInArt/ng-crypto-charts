@@ -1,4 +1,4 @@
-import { Component, OnDestroy} from '@angular/core';
+import { Component} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Snackbar } from 'src/app/components/snackbar/snackbar';
 import { AuthService } from 'src/app/services/auth.service';
@@ -9,7 +9,7 @@ import { RegisterUser } from 'src/app/shared/models/user';
   templateUrl: './register-page.component.html',
   styleUrls: ['./register-page.component.scss']
 })
-export class RegisterPageComponent implements  OnDestroy{
+export class RegisterPageComponent {
   serviceSubs: Subscription;
   action = 'Got it'
   message = 'Wrong credentials during regiser'
@@ -21,8 +21,5 @@ export class RegisterPageComponent implements  OnDestroy{
         res => console.log(res),
         err => this.snackBar.openSnackBar(this.message, this.action)
     );
-  }
-  ngOnDestroy(){
-    this.serviceSubs.unsubscribe();
   }
 }
