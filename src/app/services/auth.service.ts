@@ -68,13 +68,13 @@ export class AuthService {
       }
       this.setUsersCredentials(this.userCredential)
       this.router.navigate(['/dashboard']);
-      // setTimeout(() => {
-      //   this.isUserCred.clear()
-      // }, 5000)  
+      setTimeout(() => {
+        this.isUserCred.clear()
+      }, 5000)  
       
       // Here I'm simulating the token expiration( removing token after 5 seconds user been logged)
       // After token expiration, it should redirect me out, however, canActivate from auth-guard doesnt check "else" condition
-      // Calling a canActivate inside of setTimeout with passed parameter (user) didnt help me.
+      // Calling a 
 
     }
   
