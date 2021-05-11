@@ -18,28 +18,6 @@ const routes: Routes = [
   {path: '**', component: ErorPageComponent},
 ];
 
-//TODO: ask why such routing approach doesn't work properly
-// const routes: Routes = [
-//   {path: 'login',  component: LoginPageComponent},
-//   {path: 'register',  component: RegisterPageComponent},
-//   {path: 'dashboard',  component: DashboardComponent,  
-//   canActivate: [AuthGuard],
-//       children:[
-//       {path: 'cryptos',  component: CryptosPageComponent,   pathMatch: 'full',
-//       canActivate: [AuthGuard]
-//       }, 
-//       {path: 'users',  component: UsersPageComponent,   pathMatch: 'full',
-//       canActivate: [AuthGuard]
-//       }, 
-//       {path: '',  component: DashboardComponent, 
-//       canActivate: [AuthGuard],   pathMatch: 'full',
-//       }, 
-//       ]
-//   }, 
-//   {path: '', pathMatch:'full', redirectTo:'login'},
-//   {path: '**', component: ErorPageComponent},
-// ];
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

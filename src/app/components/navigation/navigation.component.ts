@@ -11,10 +11,10 @@ import { AuthService } from 'src/app/services/auth.service';
 
 export class NavigationComponent  {
   
-  @Output() signedOut = new EventEmitter<boolean>();
+  @Output() signedOut = new EventEmitter<any>();
  
-   get isToken():boolean{
-    return this.authService.isToken;
+   get isToken(): any{
+    return this.authService.isUserCred;
   }
 
   currentUrl: string; 
@@ -22,6 +22,6 @@ export class NavigationComponent  {
    constructor(private router: Router, private authService : AuthService){}
   
    onLogoutClick(){
-    this.signedOut.emit(true);
+    this.signedOut.emit(this.authService.logout);
   }
 }

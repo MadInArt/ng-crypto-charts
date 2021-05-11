@@ -58,13 +58,18 @@ export class PriceChartsComponent implements  OnChanges{
       // },   for some reasons applying theme object doesnt change style at all
       series: [
         {
-          name: "basic",
+          name: "Price : ",
           data:   this.price
         }
       ],
       chart: {
         type: "bar",
-        height: 350
+        height: 400 ,
+        toolbar: {
+          show: false,
+          autoSelected: "pan"
+        },
+       
       },
       plotOptions: {
         bar: {
@@ -74,10 +79,11 @@ export class PriceChartsComponent implements  OnChanges{
       dataLabels: {
         enabled: true
       },
+    
       xaxis: {
         categories: this.name
       },
-      
+      colors: ["#FF54F4"],
   }
 }
 

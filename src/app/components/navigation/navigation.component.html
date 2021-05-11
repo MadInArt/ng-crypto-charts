@@ -1,10 +1,10 @@
 <div class="example-container" >
     <mat-toolbar color="primary" class="example-toolbar" >
         <mat-toolbar-row class="toolbar_row">
-          <button mat-icon-button (click)="sidenav.toggle()" *ngIf="isToken">
+          <button mat-icon-button (click)="sidenav.toggle()" *ngIf="isToken.length > 0">
             <mat-icon>menu</mat-icon>
           </button>
-          <button mat-icon-button [disabled]='!isToken' (click)='onLogoutClick()'> 
+          <button mat-icon-button [disabled]='!isToken.length' (click)='onLogoutClick()'> 
             <mat-icon class="logout_icon">power_off</mat-icon>
           </button>
         </mat-toolbar-row>
